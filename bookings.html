@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hotel Bookings</title>
+    <link rel="stylesheet" href=
+"https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+integrity=
+"sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script src="assets/app.js"></script>
+    <script>
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCHZB0p3SvZO9FlKE_ALx1xEzJo1xYrz00",
+  authDomain: "hotel-88786.firebaseapp.com",
+  databaseURL: "https://hotel-88786-default-rtdb.firebaseio.com",
+  projectId: "hotel-88786",
+  storageBucket: "hotel-88786.appspot.com",
+  messagingSenderId: "1081525886404",
+  appId: "1:1081525886404:web:9d12a6489d7dfd25d51891",
+  measurementId: "G-L582Z4VXBQ"
+};
+firebase.initializeApp(firebaseConfig);
+         
+  var database = firebase.database();
+    database.ref('Bookings').once('value', function(snapshot){
+        if(snapshot.exists()){
+            var content = '';
+            snapshot.forEach(function(data){
+                var val = data.val();
+                content +='<tr>';       
+             
+                content += '<td>' + val.name + '</td>';
+                content += '<td>' + val.rno + '</td>';
+                content += '<td>' + val.date + '</td>';
+                content += '</tr>';
+            });
+            $('#table1').append(content);
+        }
+    });
+  </script>
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#"><b>Hotel Bookings</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Book-Now <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="bookings.html">Bookings</a>
+            </li>
+           
+            
+          </ul>
+        </div>
+      </nav>
+    <div class="container">
+      <h1><p>Booked Rooms:</p></h1>
+      
+      <table class="table table-striped" id="table1">
+    		<thead class="thead-dark">
+    			<tr>
+    		
+            <th>NAME</th>
+            <th>ROOM NO</th>
+            <th>CHECK-IN</th>
+     
+    				
+    			</tr>
+    		</thead>
+    		<tbody>
+    	
+    	</table>
+    </div>
+    <div class="row bg-primary mt-auto">  
+        <div class="col-md-12 copy">  
+        <p class="text-center text-light"> © Copyright 2021 - Hotel Management Software.  All rights reserved.<br>Developed By: Saurav Muke </p>
+       
+        </div>  
+        </div>  
+  </body>
+</html>
